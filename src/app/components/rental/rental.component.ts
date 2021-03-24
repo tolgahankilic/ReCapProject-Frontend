@@ -8,7 +8,7 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
-  rentals: Rental[] = [];
+  rentals: Rental[];
   dataLoaded = false;
 
   constructor(private rentalService: RentalService) {}

@@ -1,19 +1,11 @@
-<div *ngIf="dataLoaded == false" class="d-flex align-items-center">
-  <strong>Loading...</strong>
-  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-</div>
-
-<table *ngIf="dataLoaded == true" class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Brand Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let brand of brands">
-      <th scope="row">{{ brand.id }}</th>
-      <td>{{ brand.brandName }}</td>
-    </tr>
-  </tbody>
-</table>
+<ul class="list-group">
+  <li (click)="clearCurrentBrand()" routerLink="/cars" [class]="getAllBrandClass()">All Cars</li>
+  <li
+    (click)="setCurrentBrand(brand)"
+    routerLink="/cars/brand/{{ brand.id }}"
+    *ngFor="let brand of brands"
+    [class]="getCurrentBrandClass(brand)"
+  >
+    {{ brand.brandName }}
+  </li>
+</ul>

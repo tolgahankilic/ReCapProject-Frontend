@@ -8,8 +8,8 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Car Name</th>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Color Name</th>
+        <th scope="col">Brand Id</th>
+        <th scope="col">Color Id</th>
         <th scope="col">Model Year</th>
         <th scope="col">Daily Price</th>
         <th scope="col">Descriptions</th>
@@ -19,8 +19,8 @@
       <tr *ngFor="let car of cars">
         <th scope="row">{{ car.id }}</th>
         <td>{{ car.carName }}</td>
-        <td>{{ car.brandName }}</td>
-        <td>{{ car.colorName }}</td>
+        <td>{{ car.brandId }}</td>
+        <td>{{ car.colorId }}</td>
         <td>{{ car.modelYear }}</td>
         <td>{{ car.dailyPrice }}</td>
         <td>{{ car.descriptions }}</td>
