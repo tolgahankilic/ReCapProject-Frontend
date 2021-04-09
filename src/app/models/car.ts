@@ -5,5 +5,5 @@ export interface Car {
   carName: string;
   modelYear: string;
   dailyPrice: string;
-  descriptions: string;
+  description: string;
 }

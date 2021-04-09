@@ -8,11 +8,12 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root',
 })
 export class ColorService {
-  apiUrl = 'https://localhost:44382/api/colors/getall';
+  apiUrl = 'https://localhost:44382/api/';
 
   constructor(private httpClient: HttpClient) {}
 
   getColor(): Observable<ListResponseModel<Color>> {
-    return this.httpClient.get<ListResponseModel<Color>>(this.apiUrl);
+    let newPath = this.apiUrl+"colors/getall"
+    return this.httpClient.get<ListResponseModel<Color>>(newPath);
   }
 }

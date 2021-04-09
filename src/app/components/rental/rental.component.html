@@ -7,10 +7,8 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Brand Name</th>
-      <th scope="col">Company Name</th>
-      <th scope="col">Customer Name</th>
-      <th scope="col">Daily Price</th>
+      <th scope="col">Car Id</th>
+      <th scope="col">Customer Id</th>
       <th scope="col">Rent Date</th>
       <th scope="col">Return Date</th>
     </tr>
@@ -18,10 +16,8 @@
   <tbody>
     <tr *ngFor="let rental of rentals">
       <th scope="row">{{ rental.id }}</th>
-      <td>{{ rental.brandName }}</td>
-      <td>{{ rental.companyName }}</td>
-      <td>{{ rental.firstName }} {{rental.lastName}}</td>
-      <td>{{ rental.dailyPrice }}</td>
+      <td>{{ rental.carId }}</td>
+      <td>{{ rental.customerId }}</td>
       <td>{{ rental.rentDate }}</td>
       <td>{{ rental.returnDate }}</td>
     </tr>

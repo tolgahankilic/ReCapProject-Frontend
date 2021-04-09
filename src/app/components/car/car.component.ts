@@ -10,6 +10,7 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarComponent implements OnInit {
   cars: Car[];
+  currentCar:Car
   dataLoaded = false;
 
   constructor(
@@ -24,13 +25,13 @@ export class CarComponent implements OnInit {
       } else if (params['colorId']) {
         this.getCarsByColor(params['colorId']);
       } else {
-        this.getCar();
+        this.getCars();
       }
     });
   }
 
-  getCar() {
-    this.carService.getCar().subscribe((response) => {
+  getCars() {
+    this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
     });
@@ -48,5 +49,18 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  setButtonDetail(car:Car){
+    this.currentCar=car
+  }
+
+  getCurrentButtonClass(car:Car){
+      if (this.currentCar==car) {
+        return '"btn btn-primary"'
+      }
+      else{
+        return '"btn btn-primary"'
+      }
   }
 }
