@@ -9,7 +9,7 @@
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner d-flex" style="height: 50vh; min-height: 20rem; max-height: 30rem">
-    <div *ngFor="let image of carDetails; let i = index" [ngClass]="getSliderClassName(i)" style="height: 100%; width: 100%">
+    <div *ngFor="let image of carImages; let i = index" [ngClass]="getSliderClassName(i)" style="height: 100%; width: 100%">
       <img src="{{ imageUrl }}/{{ image.imagePath }}" class=""
       style="height: 100%; width: 100%; object-fit: contain"
       alt="imageUrl + image.imagePath" />
@@ -39,13 +39,13 @@
       <th></th>
     </tr>
   </thead>
-  <tr *ngFor="let carDetail of carDetails">
-    <td>{{ carDetail.carId }}</td>
-    <td>{{ carDetail.brandName }}</td>
-    <td>{{ carDetail.colorName }}</td>
-    <td>{{ carDetail.modelYear }}</td>
-    <td>{{ carDetail.dailyPrice }}€</td>
-    <td>{{ carDetail.description }}</td>
+  <tr *ngIf="carDetails">
+    <td>{{ carDetails.carId }}</td>
+    <td>{{ carDetails.brandName }}</td>
+    <td>{{ carDetails.colorName }}</td>
+    <td>{{ carDetails.modelYear }}</td>
+    <td>{{ carDetails.dailyPrice }}€</td>
+    <td>{{ carDetails.description }}</td>
     <br>
     <button (click)="setButtonHomePage(currentCar)"
     routerLink="/cars" 
