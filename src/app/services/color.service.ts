@@ -12,7 +12,7 @@ export class ColorService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getColor(): Observable<ListResponseModel<Color>> {
+  getColors(): Observable<ListResponseModel<Color>> {
     let newPath = this.apiUrl+"colors/getall"
     return this.httpClient.get<ListResponseModel<Color>>(newPath);
   }

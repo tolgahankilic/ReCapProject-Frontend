@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car',
@@ -10,15 +15,24 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarComponent implements OnInit {
   cars: Car[];
-  currentCar:Car
+  brands: Brand[];
+  colors: Color[];
+  selectedBrandId: number;
+  selectedColorId: number;
   dataLoaded = false;
+  filterText = '';
 
   constructor(
     private carService: CarService,
+    private brandService: BrandService,
+    private colorService: ColorService,
+    private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.getBrands();
+    this.getColors();
     this.activatedRoute.params.subscribe((params) => {
       if (params['brandId']) {
         this.getCarsByBrand(params['brandId']);
@@ -39,6 +53,7 @@ export class CarComponent implements OnInit {
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe((response) => {
+      this.toastrService.success('Cars listed by brand.');
       this.cars = response.data;
       this.dataLoaded = true;
     });
@@ -46,21 +61,21 @@ export class CarComponent implements OnInit {
 
   getCarsByColor(colorId: number) {
     this.carService.getCarsByColor(colorId).subscribe((response) => {
+      this.toastrService.success('Cars listed by color.');
       this.cars = response.data;
       this.dataLoaded = true;
     });
   }
 
-  setButtonDetail(car:Car){
-    this.currentCar=car
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
+      this.brands = response.data;
+    });
   }
 
-  getCurrentButtonClass(car:Car){
-      if (this.currentCar==car) {
-        return '"btn btn-primary"'
-      }
-      else{
-        return '"btn btn-primary"'
-      }
+  getColors() {
+    this.colorService.getColors().subscribe((response) => {
+      this.colors = response.data;
+    });
   }
 }

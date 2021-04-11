@@ -1,3 +1,45 @@
+
+<div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Search"
+  />
+</div>
+
+<table class="table-borderless col-md-12">
+  <tbody>
+    <tr class="col-md-12">
+      <td class="col-md-11">
+        <select  class="form-select" aria-label="Select brand" [(ngModel)]="selectedBrandId" >
+          <option [value]="0">All Brands</option>
+          <option *ngFor="let brand of brands" [value]="brand.id">{{brand.brandName}}</option>
+        </select>
+      </td>
+      <td class="col-md-1">
+        <div class="d-grid gap-2">
+        <button type="button" class="btn" style="background-color: #90c6eb;"  (click)="getCarsByBrand(selectedBrandId)" ><b>Filter</b></button>
+      </div>
+      </td>
+    </tr>
+    <tr class="col-md-12">
+      <td class="col-md-11">
+        <select class="form-select" aria-label="Select color" [(ngModel)]="selectedColorId" >
+          <option [value]="0">All Color</option>
+          <option *ngFor="let color of colors" [value]="color.id" >{{color.colorName}}</option>
+        </select>
+      </td>
+      <td class="col-md-1">
+        <div class="d-grid gap-2">
+        <button type="button" class="btn" style="background-color: #90c6eb;" (click)="getCarsByColor(selectedColorId)" ><b>Filter</b></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <div *ngIf="dataLoaded == false" class="d-flex align-items-center">
   <strong>Loading...</strong>
   <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
@@ -17,24 +59,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
-      <th scope="row">{{ car.id }}</th>
+    <tr *ngFor="let car of cars | carFilter: filterText">
+      <td>{{ car.id }}</td>
       <td>{{ car.carName }}</td>
       <td>{{ car.brandId }}</td>
       <td>{{ car.colorId }}</td>
       <td>{{ car.modelYear }}</td>
-      <td>{{ car.dailyPrice }}</td>
+      <td>{{ car.dailyPrice | currency }}</td>
       <td>{{ car.description }}</td>
-      <br />
-      <button
-        (click)="setButtonDetail(currentCar)"
-        routerLink="/cars/getcardetails/{{ car.id }}"
-        [class]="getCurrentButtonClass(car)"
-        type="button"
-        class="btn btn-primary"
-      >
-        Detaya Git
-      </button>
+      <td>
+        <button
+          routerLink="/cars/getcardetails/{{ car.id }}"
+          type="button"
+          class="btn btn-primary"
+        >
+          Go Detail
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
